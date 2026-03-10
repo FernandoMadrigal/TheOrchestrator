@@ -29,6 +29,19 @@ const pool = mysql.createPool({
     queueLimit: 0
 });
 
+pool.connect((err) => {
+  if (err) {
+    console.error('Error conectando a MySQL:', err.message);
+    process.exit(1);
+  }
+
+  console.log('Conexión a MySQL exitosa');
+});
+
+pool.on('error', (err) => {
+  console.error('MySQL error:', err.message);
+});
+
 const app = express();
 const PORT = process.env.PORT || 10000;
 
@@ -376,7 +389,7 @@ client.on('messageCreate', async message => {
     // 6. FINALIZAR (SOLO ADMINS)
     if (command === '$finalizar') {
         if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator)) return message.reply("⛔ **ACCESO DENEGADO:** Solo Admins.");
-        const [win] = await pool.execute(`SELECT video_id, COUNT(*) as t FROM votos WHERE semana_id = ? AND guild_id = ? GROUP BY video_id ORDER BY t DESC LIMIT 1`, [semana, guild_id]);
+        const [win] = await pool.execute(`SELECT video_id, COUNT(*) as t FROM votos WHERE AND guild_id = ? GROUP BY video_id ORDER BY t DESC LIMIT 1`, [guild_id]);
         if (!win.length) return message.reply("Nadie votó.");
         
         const [u] = await pool.execute("SELECT user_id FROM videos WHERE id = ?", [win[0].video_id]);
