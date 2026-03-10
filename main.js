@@ -29,15 +29,6 @@ const pool = mysql.createPool({
     queueLimit: 0
 });
 
-pool.connect((err) => {
-  if (err) {
-    console.error('Error conectando a MySQL:', err.message);
-    process.exit(1);
-  }
-
-  console.log('Conexión a MySQL exitosa');
-});
-
 pool.on('error', (err) => {
   console.error('MySQL error:', err.message);
 });
