@@ -29,8 +29,18 @@ const pool = mysql.createPool({
     queueLimit: 0
 });
 
+const express = require("express");
 const app = express();
+
 const PORT = process.env.PORT || 10000;
+
+app.get("/", (_, res) => {
+  res.send("Bot activo");
+});
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Servidor escuchando en ${PORT}`);
+});
 
 // --- AUTH ---
 passport.serializeUser((user, done) => done(null, user));
