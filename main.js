@@ -354,7 +354,7 @@ client.on('messageCreate', async message => {
     // 5. VIDEOS (SOLO ADMINS)
     if (command === '$votacion') {
         if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator)) return message.reply("⛔ **ACCESO DENEGADO:** Solo Admins.");
-        const [vids] = await pool.execute("SELECT * FROM videos WHERE semana_id = ? AND guild_id = ? AND estado = 'aprobado'", [semana, guild_id]);
+        const [vids] = await pool.execute("SELECT * FROM videos WHERE guild_id = ? AND estado = 'aprobado'", [guild_id]);
         if (!vids.length) return message.reply("Sin transmisiones aprobadas.");
         
         message.channel.send("**🗳️ INICIANDO PROTOCOLO DE VOTACIÓN**");
