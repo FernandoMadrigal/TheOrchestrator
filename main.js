@@ -34,11 +34,7 @@ pool.on('error', (err) => {
 });
 
 const app = express();
-const PORT = process.env.PORT || 10000;
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Servidor escuchando en ${PORT}`);
-});
+const PORT = process.env.PORT || 3000;
 
 // --- AUTH ---
 passport.serializeUser((user, done) => done(null, user));
