@@ -30,7 +30,7 @@ const pool = mysql.createPool({
 });
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 // --- AUTH ---
 passport.serializeUser((user, done) => done(null, user));
