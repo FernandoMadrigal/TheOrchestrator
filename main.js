@@ -36,10 +36,6 @@ pool.on('error', (err) => {
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-app.get("/", (_, res) => {
-  res.send("Bot activo");
-});
-
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Servidor escuchando en ${PORT}`);
 });
