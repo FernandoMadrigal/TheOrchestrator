@@ -29,9 +29,7 @@ const pool = mysql.createPool({
     queueLimit: 0
 });
 
-const express = require("express");
 const app = express();
-
 const PORT = process.env.PORT || 10000;
 
 app.get("/", (_, res) => {
