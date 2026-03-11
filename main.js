@@ -34,7 +34,7 @@ pool.on('error', (err) => {
 });
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 // --- AUTH ---
 passport.serializeUser((user, done) => done(null, user));
@@ -426,5 +426,6 @@ client.on('messageReactionAdd', async (reaction, user) => {
         await pool.execute("INSERT INTO usuarios (user_id, guild_id, username, puntos) VALUES (?, ?, ?, 0) ON DUPLICATE KEY UPDATE username = VALUES(username)", [user.id, guild_id, user.username]);
     }
 });
+
 
 client.login(process.env.BOT_TOKEN);
