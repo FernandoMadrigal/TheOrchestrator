@@ -372,7 +372,7 @@ client.on('messageCreate', async message => {
     // 6. FINALIZAR (SOLO ADMINS)
     if (command === '$finalizar') {
         if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator)) return message.reply("⛔ **ACCESO DENEGADO:** Solo Admins.");
-        const [win] = await pool.execute(`SELECT video_id, COUNT(*) as t FROM votos WHERE AND guild_id = ? GROUP BY video_id ORDER BY t DESC LIMIT 1`, [guild_id]);
+        const [win] = await pool.execute(`SELECT video_id, COUNT(*) as t FROM votos WHERE guild_id = ? GROUP BY video_id ORDER BY t DESC LIMIT 1`, [guild_id]);
         if (!win.length) return message.reply("Nadie votó.");
         
         const [u] = await pool.execute("SELECT user_id FROM videos WHERE id = ?", [win[0].video_id]);
@@ -429,3 +429,4 @@ client.on('messageReactionAdd', async (reaction, user) => {
 
 
 client.login(process.env.BOT_TOKEN);
+
